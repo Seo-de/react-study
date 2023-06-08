@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 // 부모 컴포넌트인 App.js에서 밑의 4가지 내용을 받아올거래
-function Movie({ coverImg, title, summary, genres }) {
+function Movie({ id, coverImg, title, summary, genres }) {
   return (
     // <div key={movie.id}>
     //   <img src={movie.medium_cover_image} />
@@ -17,7 +18,9 @@ function Movie({ coverImg, title, summary, genres }) {
     // 위의 코드들은 정의 되지 않은 것들이 있어서 오류가 뜨고 물결이 생겨
     <div>
       <img src={coverImg} alt={title} />
-      <h2>{title}</h2>
+      <h2>
+        <Link to={`/movie/${id}`}>{title}</Link>
+      </h2>
       <p>{summary}</p>
       <ul>
         {genres.map((g) => (
@@ -28,6 +31,7 @@ function Movie({ coverImg, title, summary, genres }) {
   );
 }
 Movie.propTypes = {
+  id: PropTypes.number.isRequired,
   coverImg: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   summary: PropTypes.string.isRequired,
